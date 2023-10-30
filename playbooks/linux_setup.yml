@@ -98,34 +98,25 @@
             curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
           when: not oh_my_zsh_folder.stat.exists
         
-        - name: Install Oh My ZSH
-          shell: >
-            cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-          when: not oh_my_zsh_folder.stat.exists
-
         - name: Install nvm
           shell: >
               curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh
               creates=/home/arghya/.nvm/nvm.sh
-
-        - name: Add NVM configuration lines to .zshrc
-          lineinfile:
-            path: "/home/arghya/.zshrc"
-            line: "{{ item }}"
-            state: present
-          loop:
-            - 'export NVM_DIR="/home/arghya/.nvm"'
-            - '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm'
-            - '[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion'
-          ignore_errors: true
         
-        - name: Install nvm
-          shell: >
-            source ~/.nvm/nvm.sh
-            creates=/home/arghya/.nvm/alias
+        - name: Update zshrc
+          get_url:
+            url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zshrc
+            dest: ~/.zshrc  # Specify the destination path and filename
+            force: yes     # Replace existing file if it exists
+        
+        - name: Update zprofile
+          get_url:
+            url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zprofile
+            dest: ~/.zprofile # Specify the destination path and filename
+            force: yes     # Replace existing file if it exists
 
         - name: Install Node
-          command: nvm install lts
+          zsh: nvm install --lts
         
         - name: Install DotNet
           dotnet_install:
