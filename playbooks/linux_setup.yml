@@ -106,23 +106,19 @@
         - name: Update zshrc
           get_url:
             url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zshrc
-            dest: ~/.zshrc  # Specify the destination path and filename
-            force: yes     # Replace existing file if it exists
+            dest: ~/.zshrc 
+            force: yes  
         
         - name: Update zprofile
           get_url:
             url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zprofile
-            dest: ~/.zprofile # Specify the destination path and filename
-            force: yes     # Replace existing file if it exists
+            dest: ~/.zprofile
+            force: yes
 
         - name: Install Node
-          zsh: nvm install --lts
+          shell: |
+            /bin/bash -c "source ~/.nvm/nvm.sh && nvm install --lts"
         
         - name: Install DotNet
           dotnet_install:
             version: 6.0
-
-        
-      
-
-    
