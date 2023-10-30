@@ -57,6 +57,8 @@
               - playonlinux
               - zsh
               - git
+              - powerline
+              - fonts-powerline
     
         - name: Add Flathub Repository
           command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -72,6 +74,9 @@
             - webstorm
             - datagrip
             - code
+        
+        - name: Set ZSH as default
+          shell: chsh -s $(which zsh)
 
         - name: Check if Google Chrome is installed and install if not
           block:
@@ -114,6 +119,15 @@
             url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zprofile
             dest: ~/.zprofile
             force: yes
+        
+        - name: Install zsh-autosugesstions
+          shell: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+        - name: Install zsh-syntax-highlighting
+          shell: git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+        - name: Install powerlevel10k
+          shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
         - name: Install Node
           shell: |
