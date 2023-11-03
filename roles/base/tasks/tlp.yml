@@ -1,0 +1,20 @@
+  - name: Remove power-profiles-daemon
+    apt:
+      name: power-profiles-daemon
+      state: absent
+
+  - name: Install TLP and related packages
+    apt:
+      name:
+        - tlp
+        - tlp-rdw
+      state: present
+  
+  - name: Install TLPUI
+    community.general.flatpak:
+      name:
+        - com.github.d4nj1.tlpui
+      state: present
+
+  - name: Start tlp
+    command: tlp start

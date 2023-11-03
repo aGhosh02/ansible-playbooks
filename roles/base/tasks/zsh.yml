@@ -1,0 +1,49 @@
+- name: install zsh
+  apt:
+    name: zsh
+
+- name: Set ZSH as default
+  shell: chsh -s $(which zsh)
+
+- name: Check if Oh My ZSH folder exists
+  stat:
+    path: /home/arghya/.oh-my-zsh
+  register: oh_my_zsh_folder
+
+- name: Install Oh My ZSH
+  shell: >
+    curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+  when: not oh_my_zsh_folder.stat.exists
+
+- name: Install zsh-autosugesstions
+  git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions 
+      dest: ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+      clone: yes
+      update: yes
+
+- name: Install zsh-syntax-highlighting
+  git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      dest: $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+      clone: yes
+      update: yes
+
+- name: Install powerlevel10k
+  git:
+      repo: https://github.com/romkatv/powerlevel10k.git
+      dest: ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+      clone: yes
+      update: yes
+
+- name: Update zshrc
+  get_url:
+    url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zshrc
+    dest: ~/.zshrc 
+    force: yes  
+
+- name: Update zprofile
+  get_url:
+    url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zprofile
+    dest: ~/.zprofile
+    force: yes

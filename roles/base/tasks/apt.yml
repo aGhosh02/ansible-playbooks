@@ -1,0 +1,25 @@
+  - name: remove existing debian CD repositories
+    ansible.builtin.file:
+      state: absent
+      path: /etc/apt/sources.list
+  
+  - name: create new sources.list
+    ansible.builtin.file:
+      state: touch
+      path: /etc/apt/sources.list
+  
+  - name: add debian repositories
+    lineinfile:
+      state: present
+      path: "/etc/apt/sources.list"
+      line: "{{ item }}"
+    loop:
+      - "deb http://deb.debian.org/debian {{ debian_codename }} main contrib non-free-firmware non-free"
+      - "deb http://deb.debian.org/debian {{ debian_codename }}-updates main contrib non-free-firmware non-free"
+      - "deb http://security.debian.org/debian-security {{ debian_codename }}-security main contrib non-free-firmware non-free"
+
+  
+  - name: install available updates
+    apt:
+      update_cache: yes 
+      upgrade: full

@@ -1,0 +1,25 @@
+---
+# tasks file for dev
+- block:
+  - name: Install nvm
+    shell: >
+        curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh
+        creates=/home/arghya/.nvm/nvm.sh
+
+  - name: Install Node
+    shell: |
+      /bin/bash -c "source ~/.nvm/nvm.sh && nvm install --lts"
+  
+  - name: Install DotNet
+    dotnet_install:
+      version: 6.0
+  
+  - name: Install Jetbrain IDEs
+    community.general.snap:
+      name: "{{ item }}"
+      classic: yes
+    loop:
+      - rider
+      - intellij-idea-ultimate
+      - webstorm
+      - datagrip

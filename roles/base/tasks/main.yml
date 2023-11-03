@@ -1,0 +1,21 @@
+---
+# tasks file for base
+- block:
+  - name: provide superuser rights to user
+    become: true
+    become_user: root
+    become_method: su
+    become_exe: su - 
+    command: 'usermod -aG sudo {{ debian_user }}'
+  
+  - import_tasks: apt.yml
+
+  - name: uninstall gnome-games
+    apt:
+      name: gnome-games
+      state: absent
+      autoremove: yes
+  
+  - import_tasks: tlp.yml
+
+  - import_tasks: essential-packages.yml

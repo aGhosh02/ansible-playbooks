@@ -1,0 +1,56 @@
+- hosts: all
+  become: true
+  roles:
+    - base
+    - dev
+    - customize-gnome
+  vars:
+      debian_user: arghya
+      debian_codename: bookworm
+      gnome_user: arghya
+      gnome_extensions:
+        - id: 307
+          enable: yes
+        - id: 517
+          enable: yes
+        - id: 3088
+          enable: yes
+        - id: 19
+          enable: yes
+        - id: 744
+          enable: yes
+        - id: 8
+          enable: yes
+        - id: 1460
+          enable: yes
+        - id: 3724
+          enable: yes
+      gnome_gsettings:
+        - schema: org.gnome.desktop.interface
+          key: color-scheme
+          value: prefer-dark
+
+
+# - hosts: all
+#   become: true
+#   roles:
+#     - customize-gnome
+#   vars:
+#       gnome_user: arghya
+#       gnome_extensions:
+#         - id: 307
+#           enable: yes
+#         - id: 517
+#           enable: yes
+#         - id: 3088
+#           enable: yes
+#         - id: 19
+#           enable: yes
+#         - id: 744
+#           enable: yes
+#         - id: 8
+#           enable: yes
+#         - id: 1460
+#           enable: yes
+#         - id: 3724
+#           enable: yes

@@ -1,0 +1,43 @@
+  - name: Install APT apps
+    apt:
+      name:
+        - build-essential
+        - gnome-shell-extension-manager
+        - snapd
+        - flatpak
+        - gnome-software-plugin-flatpak
+        - htop
+        - nvidia-driver
+        - firmware-misc-nonfree
+        - playonlinux
+        - git
+        - powerline
+        - fonts-powerline
+        - pipx
+  
+  - name: Add Flathub Repository
+    command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  
+  - name: Install Snap apps
+    community.general.snap:
+      name: "{{ item }}"
+      classic: yes
+    loop:
+      - vlc
+      - code
+  
+  - name: Check if Google Chrome is installed and install if not
+    block:
+      - name: Check if Google Chrome is installed
+        ansible.builtin.command: google-chrome --version
+        register: chrome_version
+        ignore_errors: true
+
+      - name: Download and install Google Chrome
+        google_chrome_module:
+          package_url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        when: chrome_version.rc != 0
+  
+  - import_tasks: ufw.yml
+
+  - import_tasks: zsh.yml

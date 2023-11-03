@@ -1,0 +1,14 @@
+- name: install ufw
+  apt:
+    name: ufw
+
+- name: Setup default firewall rules.
+  command: "ufw {{ item }}"
+  with_items: 
+    - default deny incoming
+    - default allow outgoing 
+    - allow ssh
+
+- name: enable UFW
+  community.general.ufw:
+    state: enabled
