@@ -9,13 +9,18 @@
     command: 'usermod -aG sudo {{ debian_user }}'
   
   - import_tasks: apt.yml
+    become: true
 
   - name: uninstall gnome-games
     apt:
       name: gnome-games
       state: absent
       autoremove: yes
-  
-  - import_tasks: tlp.yml
+    become: true
 
   - import_tasks: essential-packages.yml
+  
+  - import_tasks: tlp.yml
+    become: true
+
+  - import_tasks: kitty.yml

@@ -1,4 +1,4 @@
-debian ansible_host=10.0.119.3 ansible_connection=ssh ansible_ssh_pass=iamdevil ansible_sudo_pass=iamdevil ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+debian ansible_host=10.0.227.158 ansible_connection=ssh ansible_ssh_pass=iamdevil ansible_sudo_pass=iamdevil ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 [linux]
 debian

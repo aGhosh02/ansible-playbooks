@@ -14,9 +14,11 @@
         - powerline
         - fonts-powerline
         - pipx
+    become: true
   
   - name: Add Flathub Repository
     command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    become: true
   
   - name: Install Snap apps
     community.general.snap:
@@ -25,6 +27,7 @@
     loop:
       - vlc
       - code
+    become: true
   
   - name: Check if Google Chrome is installed and install if not
     block:
@@ -32,12 +35,14 @@
         ansible.builtin.command: google-chrome --version
         register: chrome_version
         ignore_errors: true
-
-      - name: Download and install Google Chrome
-        google_chrome_module:
-          package_url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      
+      - name: Install Google Chrome
+        apt:
+          deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         when: chrome_version.rc != 0
-  
+    become: true
+
   - import_tasks: ufw.yml
+    become: true
 
   - import_tasks: zsh.yml
