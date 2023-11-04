@@ -8,10 +8,9 @@
     git:
       repo: https://github.com/dexpota/kitty-themes.git 
       dest: ~/.config/kitty/kitty-themes
-      depth: 1
   
   - name: set kitty theme
-    command: ln -sf ~/.config/kitty/kitty-themes/{{ kitty_theme }}.conf ~/.config/kitty/theme.conf
+    command: ln -sf ~/.config/kitty/kitty-themes/themes/{{ kitty_theme }}.conf ~/.config/kitty/theme.conf
   
   - name: create new kitty.conf
     ansible.builtin.file:

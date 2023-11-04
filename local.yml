@@ -33,6 +33,8 @@
           enable: yes
         - id: 3628
           enable: yes
+        - id: 3193
+          enable: yes
       gnome_gsettings:
         - schema: org.gnome.desktop.interface
           key: color-scheme

@@ -48,3 +48,9 @@
     url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/zprofile
     dest: ~/.zprofile
     force: yes
+
+- name: Update p10k config
+  get_url:
+    url: https://raw.githubusercontent.com/aGhosh02/ansible-playbooks/master/config/p10k
+    dest: ~/.p10k.zsh
+    force: yes
