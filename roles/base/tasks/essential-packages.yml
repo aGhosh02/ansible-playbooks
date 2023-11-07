@@ -7,7 +7,7 @@
         - flatpak
         - gnome-software-plugin-flatpak
         - htop
-        - nvidia-driver
+        # - nvidia-driver
         - firmware-misc-nonfree
         - playonlinux
         - git
