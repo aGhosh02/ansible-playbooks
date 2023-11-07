@@ -1,12 +1,12 @@
 ---
 # tasks file for base
 - block:
-  - name: provide superuser rights to user
-    become: true
-    become_user: root
-    become_method: su
-    become_exe: su - 
-    command: 'usermod -aG sudo {{ debian_user }}'
+  # - name: provide superuser rights to user
+  #   become: true
+  #   become_user: root
+  #   become_method: su
+  #   become_exe: su - 
+  #   command: 'usermod -aG sudo {{ debian_user }}'
   
   - import_tasks: apt.yml
     become: true
@@ -24,3 +24,5 @@
     become: true
 
   - import_tasks: kitty.yml
+
+  - import_tasks: theme.yml

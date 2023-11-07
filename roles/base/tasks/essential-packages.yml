@@ -14,6 +14,10 @@
         - powerline
         - fonts-powerline
         - pipx
+        - ubuntu-restricted-extras
+        - gnome-tweaks 
+        - chrome-gnome-shell
+        - parcellite
     become: true
   
   - name: Add Flathub Repository

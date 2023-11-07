@@ -39,3 +39,9 @@
         - schema: org.gnome.desktop.interface
           key: color-scheme
           value: prefer-dark
+        - schema: org.gnome.shell.extensions.dash-to-dock
+          key: click-action
+          value: minimize-or-previews
+        - schema: org.gnome.shell.extensions.dash-to-dock
+          key: dock-position
+          value: BOTTOM

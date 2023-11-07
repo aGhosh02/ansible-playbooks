@@ -1,0 +1,7 @@
+- name: download whitesur theme
+  git:
+    repo: https://github.com/vinceliuice/WhiteSur-gtk-theme.git
+    dest: ~/Downloads/whitesur
+
+- name: install White Sur Theme
+  command: .~/Downloads/whitesur/install.sh -l
